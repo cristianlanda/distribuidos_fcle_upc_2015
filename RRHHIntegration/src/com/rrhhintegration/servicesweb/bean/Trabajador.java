@@ -17,6 +17,7 @@ public class Trabajador {
 	private String sexoColaborador;
 	private String estadoActivo;
 	private String correo;
+	private String campanha;
 	
 	
 	public Trabajador(String codigoDNI, String nombres, String apePat,
@@ -43,8 +44,40 @@ public class Trabajador {
 		this.estadoActivo = estadoActivo;
 		this.correo = correo;
 	}
+	
+	
 
 	
+	public Trabajador(String codigoDNI, String nombres, String apePat,
+			String apeMat, String direccion, String numCUPS, String codigoAFP,
+			String codigoBancoAbono, String estadoCivil,
+			String codigoNacionalidad, String codigoDepartamento,
+			String codigoProvincia, String codigoDistrito,
+			String sexoColaborador, String estadoActivo, String correo,
+			String campanha) {
+		super();
+		this.codigoDNI = codigoDNI;
+		this.nombres = nombres;
+		this.apePat = apePat;
+		this.apeMat = apeMat;
+		this.direccion = direccion;
+		this.numCUPS = numCUPS;
+		this.codigoAFP = codigoAFP;
+		this.codigoBancoAbono = codigoBancoAbono;
+		this.estadoCivil = estadoCivil;
+		this.codigoNacionalidad = codigoNacionalidad;
+		this.codigoDepartamento = codigoDepartamento;
+		this.codigoProvincia = codigoProvincia;
+		this.codigoDistrito = codigoDistrito;
+		this.sexoColaborador = sexoColaborador;
+		this.estadoActivo = estadoActivo;
+		this.correo = correo;
+		this.campanha = campanha;
+	}
+
+
+
+
 	public Trabajador(String codigoDNI, String estadoActivo) {
 		super();
 		this.codigoDNI = codigoDNI;
@@ -217,6 +250,18 @@ public class Trabajador {
 	}
 
 
+	public String getCampanha() {
+		return campanha;
+	}
+
+
+	public void setCampanha(String campanha) {
+		this.campanha = campanha;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Trabajador [codigoDNI=" + codigoDNI + ", nombres=" + nombres
@@ -228,9 +273,15 @@ public class Trabajador {
 				+ codigoDepartamento + ", codigoProvincia=" + codigoProvincia
 				+ ", codigoDistrito=" + codigoDistrito + ", sexoColaborador="
 				+ sexoColaborador + ", estadoActivo=" + estadoActivo
-				+ ", correo=" + correo + "]";
+				+ ", correo=" + correo + ", campanha=" + campanha + "]";
 	}
 	
+	
+
+	
+
+
+
 	
 	
 	

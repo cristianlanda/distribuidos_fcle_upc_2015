@@ -319,20 +319,78 @@ public class TrabajadorDaoImpl implements TrabajadorDao {
 		
 		System.out.println("nombres:"+nombres+", codigotrabajador="+codigoTrabajador);
 		
-		String query="";
+		String query="select trab.co_trab, trab.no_trab, trab.ap_pat_trab, trab.ap_mat_trab, trab.no_dire, trab.no_cups,"+ 
+"trab.co_afps, trab.co_banc_abon,trab.fg_civi, trab.co_naci, trab.co_dpto, trab.co_prov,"+
+"trab.co_prov, trab.co_dist, trab.fg_sexo, trab.fg_estado, trab.no_correo,  camp.desc_camp"+
+" from tmtrab_empr trab, t_camp_post empr_camp, t_campana camp, t_empresa emp "+
+"where "+
+"empr_camp.co_camp=camp.co_camp "+
+" and camp.co_emp=emp.co_emp "+
+" and empr_camp.co_trab=trab.CO_TRAB"+
+" and empr_camp.co_emp="+idEmpresa+
+" and (trab.no_trab like '%'+"+nombres+"+'%' or trab.ap_pat_trab like '%'+"+nombres+"+'%' or trab.ap_mat_trab like '%'+"+nombres+"+'%')"+
+" and empr_camp.Co_Camp like '%'+"+idCampanha+"+'%'"+
+" and trab.co_trab like '%'+"+codigoTrabajador+"+'%' and trab.fg_estado=0 ";
 		
-		if(nombres.equals("") && codigoTrabajador.equals("") && idCampanha.equals("") ){
-			query="select * from tmtrab_empr where ";
+		/*if(nombres.equals("") && codigoTrabajador.equals("") && idCampanha.equals("") ){
+			query="select trab.co_trab, trab.no_trab, trab.ap_pat_trab, "
+					+ "trab.ap_mat_trab, trab.no_dire, trab.no_cups, "
+					+ "trab.co_afps, trab.co_banc_abon,trab.fg_civi, "
+					+ "trab.co_naci, trab.co_dpto, trab.co_prov, "
+					+ "trab.co_prov, trab.co_dist, trab.fg_sexo, "
+					+ "trab.fg_estado, trab.no_correo  from tmtrab_empr trab, t_camp_post empr_camp, t_campana camp, t_empresa emp where empr_camp.co_camp=camp.co_camp and camp.co_emp=emp.co_emp and empr_camp.co_trab=trab.co_trab and emp.co_emp=? ";
 		}else{
-			if(nombres.equals("") && !codigoTrabajador.equals("")){
-				query="select * from tmtrab_empr where co_trab like ?";
-				filtro=codigoTrabajador;
-			}
-			if(!nombres.equals("") && codigoTrabajador.equals("")){
-				query="select * from tmtrab_empr where no_trab like ?";
-				filtro=nombres;
-			}
-		}
+			
+			//if(!idCampanha.equals("")){
+				if(nombres.equals("") && !codigoTrabajador.equals("")){
+					//query="select * from tmtrab_empr where co_trab like ? and ";
+					
+					query="select trab.co_trab, trab.no_trab, trab.ap_pat_trab, "
+							+ "trab.ap_mat_trab, trab.no_dire, trab.no_cups, "
+							+ "trab.co_afps, trab.co_banc_abon,trab.fg_civi, "
+							+ "trab.co_naci, trab.co_dpto, trab.co_prov, "
+							+ "trab.co_prov, trab.co_dist, trab.fg_sexo, "
+							+ "trab.fg_estado, trab.no_correo  from tmtrab_empr trab, t_camp_post empr_camp, t_campana camp, t_empresa emp where co_trab like ?";
+					
+					if(!idCampanha.equals("")){
+						query=query+" and camp.co_camp=empr_camp.co_camp and camp.co_camp=?";
+					}
+					
+					System.out.println("query: "+query);
+					
+					filtro=codigoTrabajador;
+				}
+				if(!nombres.equals("") && codigoTrabajador.equals("")){
+					//query="select * from tmtrab_empr where no_trab like ?";
+					
+					query="select trab.co_trab, trab.no_trab, trab.ap_pat_trab, "
+							+ "trab.ap_mat_trab, trab.no_dire, trab.no_cups, "
+							+ "trab.co_afps, trab.co_banc_abon,trab.fg_civi, "
+							+ "trab.co_naci, trab.co_dpto, trab.co_prov, "
+							+ "trab.co_prov, trab.co_dist, trab.fg_sexo, "
+							+ "trab.fg_estado, trab.no_correo  from tmtrab_empr trab, t_camp_post empr_camp, t_campana camp, t_empresa emp where no_trab like ?";
+					
+					if(!idCampanha.equals("")){
+						query=query+" and camp.co_camp=empr_camp.co_camp and camp.co_camp=?";
+					}
+					
+					System.out.println("query: "+query);
+					
+					filtro=nombres;
+				}*/
+//			}else{
+//				if(nombres.equals("") && !codigoTrabajador.equals("")){
+//					query="select * from tmtrab_empr where co_trab like ?";
+//					System.out.println("query: "+query);
+//					filtro=codigoTrabajador;
+//				}
+//				if(!nombres.equals("") && codigoTrabajador.equals("")){
+//					query="select * from tmtrab_empr where no_trab like ?";
+//					System.out.println("query: "+query);
+//					filtro=nombres;
+//				}
+//			}
+		//}
 		
 		
 		
@@ -340,19 +398,26 @@ public class TrabajadorDaoImpl implements TrabajadorDao {
         	con=ConexionDB.obtenerConexion();
     		
         	ps=con.prepareStatement(query);
-        	if(!filtro.equals("")){
-        		ps.setString(1, filtro+"%");
-        	}
+//        	if(!filtro.equals("")){
+//        		ps.setString(1, filtro+"%");
+//        		
+//        		if(!idCampanha.equals("")){
+//        			ps.setInt(2, Integer.parseInt(idCampanha));
+//        		}
+//        		
+//        	}else{
+//        		ps.setInt(1, Integer.parseInt(idEmpresa));
+//        	}
 	        
         	System.out.println("query:"+query);
 	        
 	        rs=ps.executeQuery();
 	        
 	        while(rs.next()){
-	        	Trabajador trabajador=new Trabajador(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-	        			rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-	        			rs.getString(10), rs.getString(11), rs.getString(12),
-	        			rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16));
+	        	Trabajador trabajador=new Trabajador(rs.getString("co_trab"), rs.getString("no_trab"), rs.getString("ap_pat_trab"), rs.getString("ap_mat_trab"),
+	        			rs.getString("no_dire"), rs.getString("no_cups"), rs.getString("co_afps"), rs.getString("co_banc_abon"), rs.getString("fg_civi"),
+	        			rs.getString("co_naci"), rs.getString("co_dpto"), rs.getString("co_prov"),
+	        			rs.getString("co_dist"), rs.getString("fg_sexo"), rs.getString("fg_estado"), rs.getString("no_correo"), rs.getString("desc_camp"));
 	        	filtroList.add(trabajador);
 	        }	        
 	        
@@ -510,7 +575,7 @@ public class TrabajadorDaoImpl implements TrabajadorDao {
 	
 	
 	public static void main(String[] args) {
-		List<Trabajador> list=new TrabajadorDaoImpl().obtenerTodos("", "");
+		List<Trabajador> list=new TrabajadorDaoImpl().obtenerTodos("", "","","1");
 		
 		
 		for (Trabajador trabajador : list) {
