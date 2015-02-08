@@ -47,9 +47,10 @@ public class TrabajadorWSImpl implements TrabajadorWS{
 	public Trabajador obtenerUno(String codigoTrabajador) {
 		return new TrabajadorDaoImpl().obtenerUno(codigoTrabajador);
 	}
-	
-	public List<Trabajador> obtenerTodos(String idEmpresa,String nombre,String codigoTrabajador){
-		
-		return null;
+	@Override
+	@WebMethod(operationName = "filtrarTodos")
+	@WebResult(name="response")
+	public List<Trabajador> filtrarTodos(String idEmpresa,String idCampanha,String nombre,String codigoTrabajador){
+		return new TrabajadorDaoImpl().obtenerTodos(nombre, codigoTrabajador,idCampanha,idEmpresa);
 	}
 }

@@ -36,8 +36,8 @@ public interface TrabajadorWS {
 	@WebMethod(operationName = "registrarTrabajador")
 	@WebResult(name="response")
 	public String registrarTrabajador(@WebParam(name = "trabajador")Trabajador trabajador);
-	@WebMethod(operationName = "obtenerTodos")
+	@WebMethod(operationName = "filtrarTodos")
 	@WebResult(name="response")
-	public List<Trabajador> obtenerTodos(@WebParam(name = "idEmpresa")String idEmpresa,@WebParam(name = "nombre")String nombre,@WebParam(name = "codigoTrabajador")String codigoTrabajador);
+	public List<Trabajador> filtrarTodos(@WebParam(name = "idEmpresa")String idEmpresa,@WebParam(name = "idCampanha")String idCampanha,@WebParam(name = "nombre")String nombre,@WebParam(name = "codigoTrabajador")String codigoTrabajador);
 
 }
